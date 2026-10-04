@@ -1,0 +1,16 @@
+# Linux: run factory-dashboard as a systemd user service.
+#   cp contrib/factory-dashboard.service ~/.config/systemd/user/
+#   systemctl --user daemon-reload && systemctl --user enable --now factory-dashboard
+[Unit]
+Description=Factory Dashboard
+After=network-online.target
+
+[Service]
+ExecStart=%h/.local/bin/factory-dashboard serve
+Restart=on-failure
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+Nice=10
+IOSchedulingClass=idle
+
+[Install]
+WantedBy=default.target

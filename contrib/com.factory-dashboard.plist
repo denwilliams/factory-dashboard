@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  macOS: start factory-dashboard at login and restart it if it exits.
+  1. Replace YOUR_USER below (and the binary path if you installed elsewhere).
+  2. cp contrib/com.factory-dashboard.plist ~/Library/LaunchAgents/
+  3. launchctl load ~/Library/LaunchAgents/com.factory-dashboard.plist
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.factory-dashboard</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/YOUR_USER/.local/bin/factory-dashboard</string>
+    <string>serve</string>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <!-- launchd starts with a bare PATH; gh/acli/vercel/pi must be findable. -->
+    <key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/Users/YOUR_USER/.local/bin</string>
+  </dict>
+  <key>RunAtLoad</key><true/>
+  <key>KeepAlive</key><true/>
+  <key>ProcessType</key><string>Background</string>
+  <key>LowPriorityIO</key><true/>
+  <key>Nice</key><integer>10</integer>
+  <key>StandardOutPath</key><string>/Users/YOUR_USER/.factory-dashboard/factory-dashboard.log</string>
+  <key>StandardErrorPath</key><string>/Users/YOUR_USER/.factory-dashboard/factory-dashboard.log</string>
+</dict>
+</plist>
