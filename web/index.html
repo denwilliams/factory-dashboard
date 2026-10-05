@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Factory Dashboard</title>
+<meta name="description" content="What your organisation is delivering — humans and agents. Jira in, GitHub out, Vercel deploys.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M2 28V14l7 4v-4l7 4v-4l7 4V4h7v24z' fill='%232a78d6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2 28V14l7 4v-4l7 4v-4l7 4V4h7v24z"/></svg>
+    <span>Factory Dashboard</span>
+  </div>
+  <div class="sources" id="sources" aria-live="polite"></div>
+  <div class="controls">
+    <div class="seg" id="window" role="radiogroup" aria-label="Time window"></div>
+    <button class="btn" id="syncBtn" type="button">Sync now</button>
+    <button class="btn icon" id="themeBtn" type="button" aria-label="Toggle theme" title="Toggle theme">◐</button>
+  </div>
+</header>
+
+<main>
+  <div class="banner" id="banner" hidden></div>
+
+  <section class="kpis" id="kpis" aria-label="Key figures"></section>
+
+  <section class="card">
+    <div class="card-head">
+      <h2>Production line</h2>
+      <span class="muted" id="lineNote"></span>
+    </div>
+    <div class="line" id="line"></div>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <div class="card-head">
+        <h2>Throughput</h2>
+        <span class="muted">PRs merged</span>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="chart" id="chart"></div>
+      <details class="tableview"><summary>Show as table</summary><div id="chartTable"></div></details>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <h2>Who's building</h2>
+        <span class="muted">humans &amp; agents</span>
+      </div>
+      <div class="scroll" id="people"></div>
+    </section>
+  </div>
+
+  <div class="grid2">
+    <section class="card">
+      <div class="card-head">
+        <h2>Repositories</h2>
+        <input class="search" id="repoFilter" type="search" placeholder="Filter repos" aria-label="Filter repositories">
+      </div>
+      <div class="scroll" id="repos"></div>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <h2>Changelog</h2>
+        <button class="btn small" id="summarizeBtn" type="button">Regenerate</button>
+      </div>
+      <div class="md scroll" id="summary"></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <div class="card-head"><h2>Activity</h2><span class="muted" id="feedNote"></span></div>
+    <ol class="feed" id="feed"></ol>
+  </section>
+</main>
+
+<div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>
